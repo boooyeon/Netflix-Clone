@@ -1,0 +1,1 @@
+insert into user(username, password, email) values('hong', '1234', 'hong@naver.com');
