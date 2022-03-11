@@ -11,11 +11,11 @@ import com.example.netflixclone.model.User;
 import lombok.Data;
 import lombok.Getter;
 
-
 // 스프링 시큐리티가 로그인 요청을 가로채서 로그인을 진행하고 완료가 되면 UserDetails 타입의 오브젝트를
 // 스프링 시큐리티의 고유한 세션 장소에 저장을 해줌 그때 저장되는 것이 UserDetails의 PrincipalDetail
 @Data
 @Getter
+
 public class PrincipalDetail implements UserDetails {
 	
 	private User user; // 객체를 품고 있는 것을 콤포지션이라고 함
@@ -31,7 +31,7 @@ public class PrincipalDetail implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return user.getUsername();
+		return user.getEmail();
 	}
 
 	// 계정이 만료되지 않았는지 리턴. (true: 만료 안됨 / false: 만료 됨)

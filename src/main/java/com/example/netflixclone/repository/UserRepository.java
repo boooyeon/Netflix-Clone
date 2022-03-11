@@ -10,8 +10,8 @@ import com.example.netflixclone.model.User;
 // DAO
 // @Repository 생략 가능 => 자동으로 bean등록이 됨
 public interface UserRepository extends JpaRepository<User, Integer> {
-	// SELECT * FROM user WHERE username=첫번째 파라미터(username);
+	// SELECT * FROM user WHERE email=첫번째 파라미터(email);
 	
-	Optional<User> findByUsername(String username);
+	Optional<User> findByEmail(String email);
 	
 }

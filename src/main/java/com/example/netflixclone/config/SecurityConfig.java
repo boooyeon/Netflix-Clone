@@ -54,6 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticated()
 			.and()
 				.formLogin()
+				.usernameParameter("email") 
+				.passwordParameter("password")
 				.loginPage("/auth/loginForm") // 인증이 되지 않은 로그인폼은 loginForm으로 
 				.loginProcessingUrl("/auth/loginProc") // 스프링 시큐리티가 해당 주소로 요청오는 로그인 정보를 가로채서 대신 로그인 해줌
 				.defaultSuccessUrl("/");

@@ -11,7 +11,7 @@ import com.example.netflixclone.config.auth.PrincipalDetail;
 public class HomeController {
 	
 	@GetMapping({"","/"})
-	public String index(@AuthenticationPrincipal PrincipalDetail principal) { // 컨트롤러에서 세션을 어떻게 찾지? 의문 생김	
+	public String index(@AuthenticationPrincipal PrincipalDetail principal) { // 컨트롤러에서 세션을 어떻게 찾지? 의문 생김		
 		if (principal != null) {
 			System.out.println("타입정보 : " + principal.getUsername());	
 		}

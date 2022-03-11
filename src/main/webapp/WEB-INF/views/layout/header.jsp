@@ -30,7 +30,7 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <c:choose>
    		<%-- 로그인이 되면 principal(session)이 있는데 만약 이 principal이 비어있다  --%>
-    	<c:when test="${empty principal }"> 
+    	<c:when test="${empty principal}"> 
     		<ul class="navbar-nav">
       			<li class="nav-item"><a class="nav-link" href="/auth/loginForm">로그인</a></li>
       			<li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>  

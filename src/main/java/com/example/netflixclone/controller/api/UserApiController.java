@@ -18,8 +18,6 @@ public class UserApiController {
 	
 	@PostMapping("/auth/joinProc")
 	 public ResponseDto<Integer> save(@RequestBody User user) {
-		System.out.println("로그인 사용자 아이디: "+user.getUsername());
-		System.out.println("로그인 사용자 아이디: "+user.getPassword());
 		System.out.println("UserApiController: save 호출");
 		
         userService.joinUser(user);
