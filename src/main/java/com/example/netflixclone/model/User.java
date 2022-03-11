@@ -1,14 +1,25 @@
-package com.example.netflixclone.entity;
+package com.example.netflixclone.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.DynamicInsert;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+//@DynamicInsert
 @Entity
 public class User {
 	@Id // Primary Key
@@ -23,4 +34,10 @@ public class User {
 	
 	@Column(nullable=false, length=50)
 	private String email;
+
+	// @ColumnDefault(" 'user' ")
+	// DB는 RoleType이라는게 없다
+	@Enumerated(EnumType.STRING)
+	private RoleType role; //Enum을 쓰는게 좋다( admin, user, manager와 같은 role 지정)
+	
 }
