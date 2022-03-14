@@ -1,13 +1,20 @@
 package com.example.netflixclone.service;
 
+import com.example.netflixclone.dto.UserRequestDto;
 import com.example.netflixclone.model.RoleType;
 import com.example.netflixclone.model.User;
 import com.example.netflixclone.repository.UserRepository;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+
 import lombok.RequiredArgsConstructor;
 
 
@@ -15,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 // Service의 의미: 
 // Service가 필요한 이유 1: 트랜잭션 관리
 @Service
-@RequiredArgsConstructor
 public class UserService {
 	
 	@Autowired
@@ -25,11 +31,13 @@ public class UserService {
 	private BCryptPasswordEncoder encoder;
 	
 	@Transactional
-	public int joinUser(User user){
-		String rawPassword = user.getPassword(); // 원 비밀번호
+	public int joinUser(UserRequestDto userDto){
+		User user = userDto.toEntity();
+		String rawPassword = userDto.getPassword(); // 원 비밀번호
 		String encPassword = encoder.encode(rawPassword); // 해쉬 비밀번호
 		user.setPassword(encPassword);
 		user.setRole(RoleType.USER);
+		System.out.println(user);
 		try {
 			userRepository.save(user);
 			return 1;
@@ -37,5 +45,19 @@ public class UserService {
 			return -1;
 		}
 	}
-
+	
+	// 회원가입시, 유효성 체크
+	@Transactional(readOnly = true)
+	public Map<String, String> validateHandling(Errors errors) {
+			 Map<String, String> validatorResult = new HashMap<>();
+			 
+			 //유효성 검사에 실패한 필드 목록을 받음
+			 for (FieldError error : errors.getFieldErrors()) {
+				 String validKeyName = String.format("valid_%s", error.getField());
+				 validatorResult.put(validKeyName, error.getDefaultMessage());
+			 }
+			 System.out.println(validatorResult.values());
+			 return validatorResult; 
+	}
+	
 }

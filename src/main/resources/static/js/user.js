@@ -61,5 +61,4 @@ let index={
 		});
 	}*/
 }
-
 index.init();
